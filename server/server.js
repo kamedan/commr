@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const userRoutes = require('./routes/account');
+
 const config = require('./config');
 
 const app = express();
@@ -22,12 +24,7 @@ app.use(morgan('dev'));
 
 app.use(cors());
 
-
-app.get('/', (req, res, next) => {
-    res.json({
-        user: 'amine'
-    })
-})
+app.use('/api/accounts', userRoutes);
 
 app.listen(config.port, (err)=> {
     console.log('server running');
