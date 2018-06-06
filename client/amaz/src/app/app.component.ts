@@ -11,8 +11,12 @@ import {Router} from '@angular/router';
 export class AppComponent {
   searchterm = '';
   isCollapsed = true;
+   token = null;
 
-  constructor(private router :Router, private data : DataService){}
+  constructor(private router :Router, private data : DataService){
+    this.data.getProfile();
+    this.token = localStorage.getItem('token');
+  }
 
 
   getToken(){
@@ -29,6 +33,7 @@ export class AppComponent {
   }
 
   logout(){
+    this.data.user = {};
     localStorage.clear();
     this.router.navigate(['']);
   }
